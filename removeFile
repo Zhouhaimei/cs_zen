@@ -1,0 +1,9 @@
+public static void removeFile(File file) {
+  if (file.isDirectory()) {
+    File[] subFiles = file.listFiles();
+    for (File subFile : subFiles) {
+      removeFile(subFile);
+    }
+  }
+  file.delete();
+}
