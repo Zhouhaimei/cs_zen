@@ -1,0 +1,3 @@
+public static int getRandomInArr(int[] arr) {
+  return arr[new Random().nextInt(arr.length)];
+}
