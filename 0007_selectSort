@@ -1,13 +1,13 @@
 function selectSort(arr) {
 	for (var i = 0; i < arr.length; i++) {
-		var tempIndex = i;
+		var index = i;
 		for (var j = i + 1; j < arr.length; j++) {
-			if (arr[tempIndex] > arr[j]) {
-				tempIndex = j;
+			if (arr[index] > arr[j]) {
+				index = j;
 			}
 		}
-		var temp = arr[tempIndex];
-		arr[tempIndex] = arr[i];
+		var temp = arr[index];
+		arr[index] = arr[i];
 		arr[i] = temp;
 	}
 }
