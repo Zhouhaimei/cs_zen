@@ -1,0 +1,27 @@
+public static void quickSort(int[] arr) {
+  _quickSort(arr, 0, arr.length - 1);
+}
+
+public static void _quickSort(int[] arr, int low, int high) {
+  if (low < high) {
+    int mid = getMid(arr, low, high);
+    _quickSort(arr, low, mid - 1);
+    _quickSort(arr, mid + 1, high);
+  }
+}
+
+public static int getMid(int[] arr, int low, int high) {
+  int temp = arr[low];
+  while (low < high) {
+    while (low < high && arr[high] >= temp) {
+      high--;
+    }
+    arr[low] = arr[high];
+    while (low < high && arr[low] <= temp) {
+      low++;
+    }
+    arr[high] = arr[low];
+  }
+  arr[low] = temp;
+  return low;
+}
