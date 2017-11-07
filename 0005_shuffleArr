@@ -1,8 +1,9 @@
 public static void shuffleArr(int[] arr) {
+  Random random = new Random();
   for (int i = 0; i < arr.length; i++) {
-    int random = new Random().nextInt(arr.length - i) + i;
-    int temp = arr[random];
-    arr[random] = arr[i];
+    int tempIndex = random.nextInt(arr.length - i) + i;
+    int temp = arr[tempIndex];
+    arr[tempIndex] = arr[i];
     arr[i] = temp;
   }
 }
