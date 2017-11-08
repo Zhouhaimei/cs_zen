@@ -11,16 +11,17 @@ public static void heapSort(int[] arr) {
 }
 
 public static void adjustHeap(int[] arr, int i, int len) {
-  int temp = arr[i];
-  for (int j = i * 2; j < len; j *= 2) {
+  for (int j = i * 2 + 1; j <= len; j = 2 * j + 1) {
     if (j < len && arr[j] < arr[j + 1]) {
       j++;
     }
-    if (temp >= arr[j]) {
+    if (arr[i] < arr[j]) {
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      i = j;
+    } else {
       break;
     }
-    arr[i] = arr[j];
-    i = j;
   }
-  arr[i] = temp;
 }
