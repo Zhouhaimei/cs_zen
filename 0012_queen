@@ -1,0 +1,24 @@
+public static void queen(int n) {
+  _queen(new int[n], 0);
+}
+
+public static void _queen(int[] arr, int cur) {
+  if (cur == arr.length) {
+    System.out.println(Arrays.toString(arr));
+    return;
+  }
+  for (int i = 0; i < arr.length; i++) {
+    arr[cur] = i;
+    boolean flag = true;
+    for (int j = 0; j < cur; j++) {
+      int temp = i - arr[j];
+      if (arr[j] == i || (temp > 0 ? temp : -temp) == cur - j) {
+        flag = false;
+        break;
+      }
+    }
+    if (flag) {
+      _queen(arr, cur + 1);
+    }
+  }
+}
