@@ -11,8 +11,7 @@ public static void _queen(int[] arr, int cur) {
     arr[cur] = i;
     boolean flag = true;
     for (int j = 0; j < cur; j++) {
-      int temp = i - arr[j];
-      if (arr[j] == i || (temp > 0 ? temp : -temp) == cur - j) {
+      if (arr[j] == i || Math.abs(i - arr[j]) == cur - j) {
         flag = false;
         break;
       }
