@@ -1,47 +1,51 @@
-// maybe a wrong answer and so slow..
-public static int[] xPlusArr = new int[] { -1, -2, -2, -1, 1, 2, 2, 1 };
-public static int[] yPlusArr = new int[] { -2, -1, 1, 2, 2, 1, -1, -2 };
+/**
+ *
+ * 
+ * 
+ * 
+ */
+public class HorseStepBoard {
+	public static int N = 8;
+	public static int cnt = 1;
+	public static int n = 1;
+	public static int[][] chess = new int[8][8];
+	public static int[][] move = { { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 },
+			{ -1, -2 } };
 
-public static void horse(int n) {
-  _horse(new int[n][n], 0, 0, 1);
-}
+	public static void main(String[] args) {
+		chess[0][0] = 1;
+		horse(0, 0);
+	}
 
-public static void print(int[][] arr, int cur) {
-  for (int i = 0; i < arr.length; i++) {
-    for (int j = 0; j < arr[i].length; j++) {
-      System.out.printf("%2d ", arr[i][j]);
-    }
-    System.out.println();
-  }
-  System.out.println("==============================" + cur);
-}
+	public static void horse(int x, int y) {
+		int i;
+		int a, b;
+		for (i = 0; i < N; i++) {
+			a = x + move[i][0];
+			b = y + move[i][1];
+			if (a >= 0 && a < N && b >= 0 && b < N && chess[a][b] == 0) {
+				chess[a][b] = ++cnt;
+				printHorse();
+				if (cnt < 64) {
+					horse(a, b);
+				} else {
+					printHorse();
+				}
+				chess[a][b] = 0;
+				printHorse();
+				cnt--;
+			}
+		}
+	}
 
-public static void _horse(int[][] arr, int x, int y, int cur) {
-  if (cur == arr.length * arr.length + 1) {
-    print(arr, cur);
-    return;
-  }
-  int xNext, yNext;
-  arr[x][y] = cur;
-  print(arr, cur);
-  for (int i = 0; i < xPlusArr.length; i++) {
-    xNext = x + xPlusArr[i];
-    yNext = y + yPlusArr[i];
+	public static void printHorse() {
+		int i, j;
+		System.out.printf("输出第%d组解：\n", n++);
+		for (i = 0; i < N; i++) {
+			for (j = 0; j < N; j++)
+				System.out.printf("%3d ", chess[i][j]);
+			System.out.printf("\n");
+		}
+	}
 
-    if (xNext < 0 || yNext < 0 || xNext > arr.length - 1 || yNext > arr.length - 1 || arr[xNext][yNext] != 0) {
-      if (i == xPlusArr.length - 1) {
-        for (int ii = 0; ii < arr.length; ii++) {
-          for (int jj = 0; jj < arr[ii].length; jj++) {
-            if (arr[ii][jj] >= cur) {
-              arr[ii][jj] = 0;
-            }
-          }
-        }
-        print(arr, -cur);
-      }
-      continue;
-    } else {
-      _horse(arr, xNext, yNext, cur + 1);
-    }
-  }
 }
