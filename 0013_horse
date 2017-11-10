@@ -1,3 +1,5 @@
+package com.zn.www;
+
 /**
  *
  * 
@@ -5,46 +7,45 @@
  * 
  */
 public class HorseStepBoard {
-	public static int N = 8;
-	public static int cnt = 1;
-	public static int n = 1;
-	public static int[][] chess = new int[8][8];
+	public static int steoCnt = 1;
+	public static int retCnt = 1;
 	public static int[][] move = { { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 },
 			{ -1, -2 } };
 
 	public static void main(String[] args) {
-		chess[0][0] = 1;
-		horse(0, 0);
+		horse(5, 0, 0);
 	}
 
-	public static void horse(int x, int y) {
-		int i;
+	public static void horse(int n, int xInit, int yInit) {
+		int[][] arr = new int[n][n];
+		arr[xInit][yInit] = 1;
+		_horse(arr, xInit, yInit);
+	}
+
+	public static void _horse(int[][] arr, int x, int y) {
 		int a, b;
-		for (i = 0; i < N; i++) {
+		for (int i = 0; i < move.length; i++) {
 			a = x + move[i][0];
 			b = y + move[i][1];
-			if (a >= 0 && a < N && b >= 0 && b < N && chess[a][b] == 0) {
-				chess[a][b] = ++cnt;
-				printHorse();
-				if (cnt < 64) {
-					horse(a, b);
+			if (a >= 0 && a < arr.length && b >= 0 && b < arr.length && arr[a][b] == 0) {
+				arr[a][b] = ++steoCnt;
+				if (steoCnt < arr.length * arr.length) {
+					_horse(arr, a, b);
 				} else {
-					printHorse();
+					printHorse(arr);
 				}
-				chess[a][b] = 0;
-				printHorse();
-				cnt--;
+				arr[a][b] = 0;
+				steoCnt--;
 			}
 		}
 	}
 
-	public static void printHorse() {
-		int i, j;
-		System.out.printf("输出第%d组解：\n", n++);
-		for (i = 0; i < N; i++) {
-			for (j = 0; j < N; j++)
-				System.out.printf("%3d ", chess[i][j]);
-			System.out.printf("\n");
+	public static void printHorse(int[][] arr) {
+		System.out.println("answer ==> " + retCnt++);
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++)
+				System.out.printf("%3d ", arr[i][j]);
+			System.out.println();
 		}
 	}
 
