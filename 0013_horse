@@ -1,4 +1,4 @@
-
+// maybe a wrong answer and so slow..
 public static int[] xPlusArr = new int[] { -1, -2, -2, -1, 1, 2, 2, 1 };
 public static int[] yPlusArr = new int[] { -2, -1, 1, 2, 2, 1, -1, -2 };
 
