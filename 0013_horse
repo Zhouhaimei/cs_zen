@@ -1,0 +1,47 @@
+
+public static int[] xPlusArr = new int[] { -1, -2, -2, -1, 1, 2, 2, 1 };
+public static int[] yPlusArr = new int[] { -2, -1, 1, 2, 2, 1, -1, -2 };
+
+public static void horse(int n) {
+  _horse(new int[n][n], 0, 0, 1);
+}
+
+public static void print(int[][] arr, int cur) {
+  for (int i = 0; i < arr.length; i++) {
+    for (int j = 0; j < arr[i].length; j++) {
+      System.out.printf("%2d ", arr[i][j]);
+    }
+    System.out.println();
+  }
+  System.out.println("==============================" + cur);
+}
+
+public static void _horse(int[][] arr, int x, int y, int cur) {
+  if (cur == arr.length * arr.length + 1) {
+    print(arr, cur);
+    return;
+  }
+  int xNext, yNext;
+  arr[x][y] = cur;
+  print(arr, cur);
+  for (int i = 0; i < xPlusArr.length; i++) {
+    xNext = x + xPlusArr[i];
+    yNext = y + yPlusArr[i];
+
+    if (xNext < 0 || yNext < 0 || xNext > arr.length - 1 || yNext > arr.length - 1 || arr[xNext][yNext] != 0) {
+      if (i == xPlusArr.length - 1) {
+        for (int ii = 0; ii < arr.length; ii++) {
+          for (int jj = 0; jj < arr[ii].length; jj++) {
+            if (arr[ii][jj] >= cur) {
+              arr[ii][jj] = 0;
+            }
+          }
+        }
+        print(arr, -cur);
+      }
+      continue;
+    } else {
+      _horse(arr, xNext, yNext, cur + 1);
+    }
+  }
+}
