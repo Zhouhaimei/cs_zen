@@ -13,7 +13,7 @@ public class HorseStepBoard {
 			{ -1, -2 } };
 
 	public static void main(String[] args) {
-		horse(5, 0, 0);
+		horse(8, 0, 0);
 	}
 
 	public static void horse(int n, int xInit, int yInit) {
