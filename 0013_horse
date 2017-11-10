@@ -1,5 +1,3 @@
-package com.zn.www;
-
 public class HorseStepBoard {
 	public static int steoCnt = 1;
 	public static int retCnt = 1;
