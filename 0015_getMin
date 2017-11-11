@@ -1,0 +1,9 @@
+public static int getMin(int... is) {
+  int min = Integer.MAX_VALUE;
+  for (int i : is) {
+    if (min > i) {
+      min = i;
+    }
+  }
+  return min;
+}
