@@ -1,4 +1,4 @@
-// return how many steps to change binary n to binary n;
+// return how many steps to change binary m to binary n;
 public static int stepsChangeM2N(int m, int n) {
   int ret = 0;
   int temp = m ^ n;
