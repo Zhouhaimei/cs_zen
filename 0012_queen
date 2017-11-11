@@ -1,10 +1,16 @@
+public static void main(String[] args) {
+  queen(8);
+}
+
+public static int retCnt = 1;
+
 public static void queen(int n) {
   _queen(new int[n], 0);
 }
 
 public static void _queen(int[] arr, int cur) {
   if (cur == arr.length) {
-    System.out.println(Arrays.toString(arr));
+    printQueen(arr);
     return;
   }
   for (int i = 0; i < arr.length; i++) {
@@ -19,5 +25,15 @@ public static void _queen(int[] arr, int cur) {
     if (flag) {
       _queen(arr, cur + 1);
     }
+  }
+}
+
+public static void printQueen(int[] arr) {
+  System.out.println("answer ==> " + retCnt++);
+  for (int i = 0; i < arr.length; i++) {
+    for (int j = 0; j < arr.length; j++) {
+      System.out.print(j == arr[i] ? "★ " : "・ ");
+    }
+    System.out.println();
   }
 }
