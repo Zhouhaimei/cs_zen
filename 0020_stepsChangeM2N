@@ -1,0 +1,12 @@
+// return how many steps to change binary n to binary n;
+public static int stepsChangeM2N(int m, int n) {
+  int ret = 0;
+  int temp = m ^ n;
+  while (temp != 0) {
+    if ((temp & 1) == 1) {
+      ret++;
+    }
+    temp >>= 1;
+  }
+  return ret;
+}
