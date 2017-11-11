@@ -6,14 +6,9 @@ public static int levenshteinDistance(String str1, String str2) {
   for (int i = 0; i <= str2.length(); i++) {
     diff[0][i] = i;
   }
-  int temp;
   for (int i = 1; i <= str1.length(); i++) {
     for (int j = 1; j <= str2.length(); j++) {
-      if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
-        temp = 0;
-      } else {
-        temp = 1;
-      }
+      int temp = str1.charAt(i - 1) == str2.charAt(j - 1) ? 0 : 1;
       diff[i][j] = Math.min(Math.min(diff[i - 1][j - 1] + temp, diff[i][j - 1] + 1), diff[i - 1][j] + 1);
     }
   }
