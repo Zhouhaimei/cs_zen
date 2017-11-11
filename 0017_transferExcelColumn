@@ -1,0 +1,8 @@
+public static int transferExcelColumn(String s) {
+  int ret = 0;
+  for (int i = 0; i < s.length(); i++) {
+    char c = s.charAt(i);
+    ret += (c - 'A' + 1) * Math.pow(26, s.length() - i - 1);
+  }
+  return ret;
+}
