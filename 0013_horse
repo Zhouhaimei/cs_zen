@@ -1,7 +1,6 @@
 public static int steoCnt = 1;
 public static int retCnt = 1;
-public static int[][] move = { { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 },
-{ -1, -2 } };
+public static int[][] move = { { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 }, { -1, -2 } };
 
 public static void main(String[] args) {
   horse(8, 0, 0);
@@ -20,11 +19,11 @@ public static void _horse(int[][] arr, int x, int y) {
     b = y + move[i][1];
     if (a >= 0 && a < arr.length && b >= 0 && b < arr.length && arr[a][b] == 0) {
       arr[a][b] = ++steoCnt;
-        if (steoCnt < arr.length * arr.length) {
-          _horse(arr, a, b);
-        } else {
-            printHorse(arr);
-        }
+      if (steoCnt < arr.length * arr.length) {
+        _horse(arr, a, b);
+      } else {
+        printHorse(arr);
+      }
       arr[a][b] = 0;
       steoCnt--;
     }
@@ -34,8 +33,9 @@ public static void _horse(int[][] arr, int x, int y) {
 public static void printHorse(int[][] arr) {
   System.out.println("answer ==> " + retCnt++);
   for (int i = 0; i < arr.length; i++) {
-    for (int j = 0; j < arr[i].length; j++)
+    for (int j = 0; j < arr[i].length; j++) {
       System.out.printf("%3d ", arr[i][j]);
-    System.out.println();
+      System.out.println();
+    }
   }
 }
