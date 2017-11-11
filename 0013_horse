@@ -1,10 +1,11 @@
-public static int steoCnt = 1;
-public static int retCnt = 1;
-public static int[][] move = { { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 }, { -1, -2 } };
-
 public static void main(String[] args) {
   horse(8, 0, 0);
 }
+
+public static int steoCnt = 1;
+public static int retCnt = 1;
+public static int[][] move = { { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 },
+    { -1, -2 } };
 
 public static void horse(int n, int xInit, int yInit) {
   int[][] arr = new int[n][n];
