@@ -1,0 +1,30 @@
+// 查询sid, serial#
+select sid,serial# from v$session t where t.SID IN (select session_id from v$locked_object);
+
+// kill session
+alter system kill session 'sid,serial#' immediate;
+
+// 获得进程号
+select spid, osuser, s.program from v$session s,v$process p where s.paddr = p.addr and s.sid = &sid
+
+// 在OS上杀死进程
+kill -9 spid
+
+// get blocked sqltext
+select sql_text from v$sql where hash_value in (select sql_hash_value from v$session where sid in (select session_id from v$locked_object));
+
+// 查找被锁定的表: 
+select object_name, session_id, os_user_name, oracle_username, process, locked_mode, status from v$locked_object l, all_objects a where l.object_id = a.object_id;
+
+// 可以找到谁阻塞了谁
+select s1.username || s1.machine || '( SID = ' || s1.sid || ')  is blocking ' || s2.username || s2.machine || '(SID = ' || s2.sid || ') ' AS blocking_status 
+from v$lock l1, v$session s1, v$lock l2, v$session s2 where s1.sid = l1.sid and s2.sid = l2.sid and l1.BLOCK = 1 and l2.request > 0 and l1.id1 = l2.id1 and l2.id2 = l2.id2;
+
+// 查询数据库中的锁
+select * from v$lock where block > 1;
+
+// 查阻塞别的会话锁
+select * from v$lock where lmode > 0 and type in ('TM','TX');
+
+// 查询数据库正在等待锁的进程
+select * from v$session where lockwait is not null;
