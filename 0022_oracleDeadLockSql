@@ -28,3 +28,6 @@ select * from v$lock where lmode > 0 and type in ('TM','TX');
 
 // 查询数据库正在等待锁的进程
 select * from v$session where lockwait is not null;
+
+// 直观查看DML锁
+select * from DBA_DML_LOCKS
