@@ -1,0 +1,33 @@
+// 创建一个测试表
+create table a(a date); 
+
+// 创建一个存储过程
+create or replace procedure test as   
+    begin   
+    insert into a values(sysdate);   
+   end;
+   
+ // 定时任务样板：
+ declare  
+job1 number;   
+begin  
+ dbms_job.submit(job1,  
+     what => 'test;',  
+     next_date => sysdate,  
+     interval => 'sysdate+1/(24*60*60)'); -- 每隔1s处理一次用户表  
+   commit;  
+end; 
+
+// 查询定时任务
+select job,broken,what,interval,t.* from user_jobs t;  
+
+// 删除定时任务
+begin  
+       dbms_job.remove('24');  
+       commit;  
+end;  
+
+// 启动定时任务
+begin    
+      dbms_job.run(24);  -- 24jod id  
+end; 
