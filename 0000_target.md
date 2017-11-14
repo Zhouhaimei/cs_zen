@@ -1,1 +1,1 @@
-# I will write down 10000 little algorithm codes here..
+# I will write down 10000 little codes here..
