@@ -1,96 +1,51 @@
-package com.zn.www;
+// with mail.jar activation.jar
+public static void sendMail() throws Exception {
 
-import java.security.GeneralSecurityException;
-import java.util.Properties;
+	String to = "neng.zeng@qq.com";
+	String from = "m17004294029@163.com";
+	String host = "smtp.163.com";
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.Authenticator;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+	Properties properties = System.getProperties();
 
-import com.sun.mail.util.MailSSLSocketFactory;
+	properties.setProperty("mail.smtp.host", host);
+	properties.put("mail.smtp.auth", "true");
 
-public class HelloWorld {
-	public static void main(String[] args) throws GeneralSecurityException {
-		// 收件人电子邮箱
-		String to = "neng.zeng@qq.com";
-
-		// 发件人电子邮箱
-		String from = "neng.zeng@qq.com";
-
-		// 指定发送邮件的主机为 smtp.qq.com
-		String host = "smtp.qq.com"; // QQ 邮件服务器
-
-		// 获取系统属性
-		Properties properties = System.getProperties();
-
-		// 设置邮件服务器
-		properties.setProperty("mail.smtp.host", host);
-
-		properties.put("mail.smtp.auth", "true");
-		MailSSLSocketFactory sf = new MailSSLSocketFactory();
-		sf.setTrustAllHosts(true);
-		properties.put("mail.smtp.ssl.enable", "true");
-		properties.put("mail.smtp.ssl.socketFactory", sf);
-		// 获取默认session对象
-		Session session = Session.getDefaultInstance(properties, new Authenticator() {
-			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("neng.zeng@qq.com", "xxxxxxxxxxxxxxxxx"); // 发件人邮件用户名、密码
-			}
-		});
-
-		try {
-			// 创建默认的 MimeMessage 对象
-			MimeMessage message = new MimeMessage(session);
-
-			// Set From: 头部头字段
-			message.setFrom(new InternetAddress(from));
-
-			// Set To: 头部头字段
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-			// Set Subject: 头部头字段
-			message.setSubject("This is the Subject Line!");
-
-			// 创建消息部分
-			BodyPart messageBodyPart = new MimeBodyPart();
-
-			// 消息
-			messageBodyPart.setText("This is message body");
-
-			// 创建多重消息
-			Multipart multipart = new MimeMultipart();
-
-			// 设置文本消息部分
-			multipart.addBodyPart(messageBodyPart);
-
-			// 附件部分
-			messageBodyPart = new MimeBodyPart();
-			String filename = "c:\\users\\xxxxxx\\desktop\\★.★";
-			DataSource source = new FileDataSource(filename);
-			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName(filename);
-			multipart.addBodyPart(messageBodyPart);
-
-			// 发送完整消息
-			message.setContent(multipart);
-
-			// 发送消息
-			Transport.send(message);
-			System.out.println("Sent message successfully....from neng.zeng");
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
+	MailSSLSocketFactory sf = new MailSSLSocketFactory();
+	sf.setTrustAllHosts(true);
+	properties.put("mail.smtp.ssl.enable", "true");
+	properties.put("mail.smtp.ssl.socketFactory", sf);
+	Session session = Session.getDefaultInstance(properties, new Authenticator() {
+		public PasswordAuthentication getPasswordAuthentication() {
+			return new PasswordAuthentication("m17004294029@163.com", "zengneng3849"); //
 		}
+	});
+
+	try {
+		MimeMessage message = new MimeMessage(session);
+
+		message.setFrom(new InternetAddress(from));
+		message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		message.addRecipient(Message.RecipientType.CC, new InternetAddress(to));
+		message.setSubject("This is the Subject Line!");
+
+		Multipart multipart = new MimeMultipart();
+
+		BodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setText("This is message body");
+		multipart.addBodyPart(messageBodyPart);
+
+		messageBodyPart = new MimeBodyPart();
+		String filename = "c:\\users\\dhc\\desktop\\111.txt";
+		DataSource source = new FileDataSource(filename);
+		messageBodyPart.setDataHandler(new DataHandler(source));
+		messageBodyPart.setFileName(filename.substring(filename.lastIndexOf("\\") + 1));
+		multipart.addBodyPart(messageBodyPart);
+
+		message.setContent(multipart);
+
+		Transport.send(message);
+		System.out.println("Sent message successfully....from neng.zeng");
+	} catch (MessagingException mex) {
+		mex.printStackTrace();
 	}
 }
