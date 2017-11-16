@@ -1,2 +1,2 @@
 // find the repeated customerno
-select customerno from m_customer group by customerno having count(1) > 0;
+select customerno from m_customer group by customerno having count(1) > 1;
