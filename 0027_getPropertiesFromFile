@@ -1,0 +1,9 @@
+public static void testProperties() throws FileNotFoundException, IOException {
+  Properties pro = new Properties();
+  pro.load(Object.class.getResourceAsStream("/com/zn/www/resources/jdbc.properties"));
+
+  Set<Object> keySet = pro.keySet();
+  for (Object key : keySet) {
+    System.out.println(key + " : " + pro.getOrDefault(key, null));
+  }
+}
