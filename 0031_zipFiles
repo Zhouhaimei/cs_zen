@@ -1,0 +1,45 @@
+// with jar ant-1.7.1.jar
+public static boolean zipFiles(String[] srcfile, String zipfile) {
+  boolean reFlag = false;
+  byte[] buf = new byte[10240];
+  ZipOutputStream out = null;
+  FileInputStream in = null;
+  try {
+    out = new ZipOutputStream(new FileOutputStream(zipfile));
+    out.setEncoding("gbk");
+    for (int i = 0; i < srcfile.length; i++) {
+      in = new FileInputStream(srcfile[i]);
+      out.putNextEntry(new ZipEntry(new File(srcfile[i]).getName()));
+      int len;
+      while ((len = in.read(buf)) > 0) {
+        out.write(buf, 0, len);
+      }
+      out.closeEntry();
+      in.close();
+      in = null;
+    }
+    out.close();
+    out = null;
+    reFlag = true;
+  } catch (Exception e) {
+    e.printStackTrace();
+  } finally {
+    if (in != null) {
+      try {
+        in.close();
+        in = null;
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    if (out != null) {
+      try {
+        out.close();
+        out = null;
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  return reFlag;
+}
