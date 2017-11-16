@@ -1,2 +1,15 @@
 // find the repeated customerno
 select customerno from m_customer group by customerno having count(1) > 1;
+
+// use a for loop to select the nextval of sequence
+declare cnt NUMBER(10) := 0; 
+begin
+for i in 1..400 loop
+      select seq_customerid.nextval into cnt from dual;
+    end loop;
+end;
+
+// the more efficient way to change the nextval of sequence
+alter sequence seq_customerid increment by 1000;
+select seq_customerid.nextval from dual;
+alter sequence seq_customerid increment by 1;
