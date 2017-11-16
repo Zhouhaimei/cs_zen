@@ -1,0 +1,13 @@
+	// is all alpha
+  public static boolean isAlpha(final String str) {
+		Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+		Matcher matcher = pattern.matcher(str);
+		return matcher.matches();
+	}
+  
+  // is contains alpha
+  public static boolean inAlpha(final String str) {
+		Pattern pattern = Pattern.compile("[a-zA-Z]");
+		Matcher matcher = pattern.matcher(str);
+		return matcher.find();
+	}
