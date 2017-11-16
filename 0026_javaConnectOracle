@@ -1,0 +1,31 @@
+public static void testOracle() {
+  Connection con = null;
+  PreparedStatement pre = null;
+  ResultSet result = null;
+  try {
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+    String url = "jdbc:oracle:thin:@172.20.XXX.XX:1521:XXXXXXXX";
+    String user = "XXXXXXXX";
+    String password = "XXXXXXXX";
+    con = DriverManager.getConnection(url, user, password);
+    String sql = "select * from m_bank where 1 = ?";
+    pre = con.prepareStatement(sql);
+    pre.setString(1, "1");
+    result = pre.executeQuery();
+    while (result.next())
+      System.out.println(result.getString("BANKID") + "\t" + result.getString("BANKMEIE"));
+  } catch (Exception e) {
+    e.printStackTrace();
+  } finally {
+    try {
+      if (result != null)
+        result.close();
+      if (pre != null)
+        pre.close();
+      if (con != null)
+        con.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
