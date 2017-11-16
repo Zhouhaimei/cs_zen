@@ -1,0 +1,36 @@
+public static void copyFileByChars(String fileNameFrom, String fileNameTo) {
+  Reader in = null;
+  Writer out = null;
+  try {
+    in = new FileReader(fileNameFrom);
+    out = new FileWriter(fileNameTo);
+    int len;
+    char[] cbuf = new char[1024];
+    while ((len = in.read(cbuf, 0, 1024)) != -1) {
+      out.write(cbuf, 0, len);
+    }
+    in.close();
+    out.flush();
+    out.close();
+  } catch (IOException e) {
+    e.printStackTrace();
+    return;
+  } catch (Exception e) {
+    e.printStackTrace();
+  } finally {
+    if (in != null) {
+      try {
+        in.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    if (out != null) {
+      try {
+        in.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+}
