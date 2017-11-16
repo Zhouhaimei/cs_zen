@@ -2,8 +2,8 @@ public static void copyFileByBytes(String fileNameFrom, String fileNameTo) {
   InputStream in = null;
   OutputStream out = null;
   try {
-    in = new FileInputStream(fileNameFrom);
-    out = new FileOutputStream(fileNameTo);
+    in = new BufferedInputStream(new FileInputStream(fileNameFrom));
+    out = new BufferedOutputStream(new FileOutputStream(fileNameTo));
     int len;
     byte[] bytes = new byte[1024];
     while ((len = in.read(bytes, 0, 1024)) != -1) {
