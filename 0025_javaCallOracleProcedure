@@ -1,0 +1,20 @@
+// call strint
+String str = "{call dbo.pro_get_AT_HoliDayLimit_RestCount(?, ?, ?, ?)}";
+
+// call statement
+CallableStatement cs = super.getDataAccessMain().getConn().prepareCall(str);
+
+// set params
+cstmt.setString(1, param1);
+cstmt.setString(2, param2);
+
+// declare return params types
+cstmt.registerOutParameter(3, java.sql.Types.INTEGER);
+cstmt.registerOutParameter(4, java.sql.Types.NVARCHAR);
+
+// execute procedure
+cstmt.execute();
+
+// get return params
+int param3 = cstmt.getInt(3);
+int param3 = cstmt.getString(4);
