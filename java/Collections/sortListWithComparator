@@ -1,0 +1,62 @@
+public class HelloWorld {
+	public static void main(String[] args) {
+		Person p1 = new Person("A", 1);
+		Person p2 = new Person("B", 3);
+		Person p3 = new Person("C", 2);
+
+		List<Person> list = new ArrayList<Person>();
+		list.add(p1);
+		list.add(p2);
+		list.add(p3);
+		for (Person p : list) {
+			System.out.println(p);
+		}
+		Collections.sort(list, new PersonCompare());
+		for (Person p : list) {
+			System.out.println(p);
+		}
+	}
+
+	public static void sortList(List<Person> personList) {
+
+	}
+
+}
+
+class PersonCompare implements Comparator<Person> {
+
+	@Override
+	public int compare(Person o1, Person o2) {
+		return o1.getAge() > o2.getAge() ? 1 : -1;
+	}
+}
+
+class Person {
+	private String name;
+	private int age;
+
+	public Person(String name, int age) {
+		this.setName(name);
+		this.setAge(age);
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String toString() {
+		return this.getName() + "_" + this.getAge();
+	}
+}
