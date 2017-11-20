@@ -16,11 +16,6 @@ public class HelloWorld {
 			System.out.println(p);
 		}
 	}
-
-	public static void sortList(List<Person> personList) {
-
-	}
-
 }
 
 class PersonCompare implements Comparator<Person> {
